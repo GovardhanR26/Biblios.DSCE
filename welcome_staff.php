@@ -20,9 +20,6 @@ if(!isset($_SESSION["loggedin_staff"]) || $_SESSION["loggedin_staff"] !== true){
         body{ font: 14px sans-serif; text-align: center; }
     </style>
 	<script>
-		//function searchClicked() {
-		//	window.location = "searchPage2.php";
-		//}
 		function issueClicked() {
 			window.location = "issuePage_staff.php";
 		}
@@ -47,6 +44,9 @@ if(!isset($_SESSION["loggedin_staff"]) || $_SESSION["loggedin_staff"] !== true){
 		function newbookClicked() {
 			window.location = "newBook.php";
 		}
+		function bookCatClicked() {
+			window.location = "bookCatalogue.php";
+		}
 	</script>
 </head>
 <body style="background-color:green">
@@ -54,22 +54,18 @@ if(!isset($_SESSION["loggedin_staff"]) || $_SESSION["loggedin_staff"] !== true){
 	<center>
 	<input type="button" name="issue" onclick="issueClicked()" value="Issue"></input>
 	<br/><br/>
-	<!--seachPage2 is not working as expected.<input type="button" name="search" onclick="searchClicked()" value="Search"></input>
-	<br/><br/>-->
 	<input type="button" name="search" onclick="searchEditClicked()" value="Search Page Editted"></input>
 	<br/><br/>
 	<input type="button" name="return_book" onclick="returnClicked()" value="Return"></input>
 	<br/><br/>
-	<!--<input type="button" name="view_book" onclick="viewClicked()" value="My Books"></input>
-	<br/><br/>
-	<input type="button" name="reserve_show" onclick="reserveClicked()" value="My Reservations"></input>
-	<br/><br/>-->
 	<input type="button" name="outstanding_books" onclick="outstandingClicked()" value="Outstanding Books"></input>
 	<br/><br/>
 	<input type="button" name="new_book" onclick="newbookClicked()" value="New Book"></input>
 	<br/><br/>
 	<input type="button" onclick="newUserClicked()" value="New User"></input>
-	<center>
+	<br/><br/>
+	<input type="button" onclick="bookCatClicked()" value="Book Catalogue"></input>
+	</center>
 	<br/>
 	<br/>
     <p>
