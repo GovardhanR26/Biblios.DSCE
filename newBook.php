@@ -120,8 +120,7 @@ date_default_timezone_set("Asia/Calcutta");
 			} else {
 			echo "Error: " . $insert_reportQue . "<br>" . $link->error;
 			}
-			
-			echo "<script>alert('Reader registered successfully.');document.location='welcome_staff.php';</script>";
+			echo "<script>alert('Book added successfully.');document.location='welcome_staff.php';</script>";
 			
 		} else {
 			echo "<script>alert('Fields are not formatted properly.');</script>";

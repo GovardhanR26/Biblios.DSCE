@@ -16,6 +16,54 @@
 
     $title_err = $author_err = $publisher_err = $edition_err = $category_err = $price_err = $availability_err = "";
 
+    if(($_SERVER["REQUEST_METHOD"]=="POST") && isset($_POST["modify_book"])) {
+        $new_title = $_POST["title_txt"];
+        $new_author = $_POST["author_txt"];
+        $new_publisher = $_POST["publisher_txt"];
+        $new_edition = $_POST["edition_txt"];
+        $new_price = $_POST["price_txt"];
+        $new_category = $_POST["category_txt"];
+        $new_availability = $_POST["availability_txt"];
+
+        //queries
+        //update BOOK table
+        $updateBook_Que = "UPDATE book SET 
+                                title='".$new_title."', 
+                                author='".$new_author."', 
+                                publisher='".$new_publisher."', 
+                                edition='".$new_edition."', 
+                                price=".$new_price.", 
+                                category='".$new_category."', 
+                                availability='".$new_availability."'
+                            WHERE book_ID=".$bookID."";
+
+        //executing queries
+        //updating the BOOK table
+		if ($link->query($updateBook_Que) === TRUE) {
+			//echo "Update successfull";
+			//we do nothing here
+		} else {
+			echo "Error: " . $updateBook_Que . "<br>" . $link->error;
+		}
+        echo "<script>alert('Book modified successfully');document.location='bookCatalogue.php'</script>";
+    }
+
+    if(($_SERVER["REQUEST_METHOD"]=="POST") && isset($_POST["delete_book"])) {
+        //queries
+        //to delete book from BOOK table
+        $deleteBook_Que = "DELETE FROM book WHERE book_ID=".$bookID."";
+
+        //executing queries
+        //deleting from BOOK table
+		if ($link->query($deleteBook_Que) === TRUE) {
+			//echo "Delete successfull";
+			//we do nothing here
+		} else {
+			echo "Error: " . $deleteBook_Que . "<br>" . $link->error;
+		}
+        echo "<script>alert('Book deleted successfully');document.location='bookCatalogue.php'</script>";
+    }
+
     if($bookID) {
         $selectBook_Que = "SELECT * FROM book WHERE book_ID=".$bookID."";
 
@@ -36,7 +84,7 @@
                             </title>
                         </head>
                         <body>
-                            <form action="" method="post">
+                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                                 <table>
                                     <tr>
                                         <td><label for="bookID"> Book ID : </label></td>
@@ -74,6 +122,7 @@
                             <br/>
                             <input type="submit" name="modify_book" value="Save Changes"/>
                             <input type="submit" name="delete_book" value="Delete Book"/>
+                            <input type="submit" name="cancel" value="Cancel"/>
                             </form>
                             <p>
                                 <a href="bookCatalogue.php"> Back to catalogue </a>

@@ -49,7 +49,7 @@
                         <th> Price </th>
                         <th> Category </th>
                         <th> Staff ID </th>
-                        <th> Availability </th>
+                        <th colspan="2"> Availability </th>
                         </tr>
                         <?php
                             while($row = $result->fetch_assoc())
