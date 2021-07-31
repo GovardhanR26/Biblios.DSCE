@@ -11,8 +11,14 @@
 
     require 'connect_db.php';
     $userID = $_SESSION["id"];
+    $_SESSION["mod_bookID"] = "";
 
     //button click code here
+    if(($_SERVER["REQUEST_METHOD"]=="POST") && isset($_POST["modify_button"])) {
+        $_SESSION["mod_bookID"] = $_POST["modify_button"];
+        header("location: modify_book.php");
+        exit;
+    }
 
     $displayAllBooks_Que = "SELECT book_ID, title, author, publisher, edition, price, category, staff_id, availability FROM book";
 
@@ -58,6 +64,11 @@
                                 <td><?php echo $row['category']?></td>
                                 <td><?php echo $row['staff_id']?></td>
                                 <td><?php echo $row['availability']?></td>
+                                <!-- admin buttons below -->
+                                <td><form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                                <button type="submit" value="<?php echo $row['book_ID']?>" name="modify_button"> Modify </button>
+                                </form>
+                                </td>
                             <?php
                             }
                 }
