@@ -37,34 +37,40 @@
                         </head>
                         <body>
                             <form action="" method="post">
-                            <label> Book Title : 
-                            <input type="text" name="title_txt" value="<?php echo $row['title']?>" />
-                            <span class="invalid-feedback"><?php echo $title_err; ?></span>
-                            </label><br/>
-                            <label> Author : 
-                            <input type="text" name="author_txt" value="<?php echo $row['author']?>"/>
-                            <span class="invalid-feedback"><?php echo $author_err; ?></span>
-                            </label><br/>
-                            <label> Publisher : 
-                            <input type="text" name="publisher_txt" value="<?php echo $row['publisher']?>"/>
-                            <span class="invalid-feedback"><?php echo $publisher_err; ?></span>
-                            </label><br/>
-                            <label> Edition :
-                            <input type="text" name="edition_txt" value="<?php echo $row['edition']?>"/>
-                            <span class="invalid-feedback"><?php echo $edition_err; ?></span>
-                            </label><br/>
-                            <label> Price : 
-                            <input type="number" name="price_txt" value="<?php echo $row['price']?>"/>
-                            <span class="invalid-feedback"><?php echo $price_err; ?></span>
-                            </label><br/>
-                            <label> Category :
-                            <input type="text" name="category_txt" value="<?php echo $row['category']?>"/>
-                            <span class="invalid-feedback"><?php echo $category_err; ?></span>
-                            </label><br/>
-                            <label> Availability :
-                            <input type="text" name="availability_txt" value="<?php echo $row['availability']?>"/>
-                            <span class="invalid-feedback"><?php echo $availability_err; ?></span>
-                            </label><br/>
+                                <table>
+                                    <tr>
+                                        <td><label for="bookID"> Book ID : </label></td>
+                                        <td><input id="bookID" type="text" name="id_txt" size="50" value="<?php echo $row['book_ID']?>" disabled/></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="title"> Book Title : </label></td>
+                                        <td><input id="title" type="text" name="title_txt" size="50" value="<?php echo $row['title']?>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="author"> Author : </label></td>
+                                        <td><input id="author" type="text" name="author_txt" size="50" value="<?php echo $row['author']?>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="publisher"> Publisher : </label></td>
+                                        <td><input id="publisher" type="text" name="publisher_txt" size="50" value="<?php echo $row['publisher']?>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="edition"> Edition : </label></td>
+                                        <td><input id="edition" type="text" name="edition_txt" size="50" value="<?php echo $row['edition']?>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="price"> Price : </label></td>
+                                        <td><input id="price" type="text" name="price_txt" size="50" value="<?php echo $row['price']?>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="category"> Category : </label></td>
+                                        <td><input id="category" type="text" name="category_txt" size="50" value="<?php echo $row['category']?>" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="availability"> Availability : </label></td>
+                                        <td><input id="availability" type="text" name="availability_txt" size="50" value="<?php echo $row['availability']?>" /></td>
+                                    </tr>
+                                </table>
                             <br/>
                             <input type="submit" name="modify_book" value="Save Changes"/>
                             <input type="submit" name="delete_book" value="Delete Book"/>
