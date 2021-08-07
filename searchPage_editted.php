@@ -10,6 +10,7 @@ date_default_timezone_set("Asia/Calcutta");
 	}
 	
 	require 'connect_db.php';
+	require 'mailDetails.php';
 	
 	// checking if any button in the table has been pressed
 	if(($_SERVER["REQUEST_METHOD"]=="POST") && (isset($_POST["table_button"]))) {
@@ -51,9 +52,23 @@ date_default_timezone_set("Asia/Calcutta");
 								
 							//insert into BORROWED table
 							$insert_borrowQue = "INSERT INTO borrowed VALUES('".$reader_ID."','".$book_ID."','".$date1."','".$due_date."')";
-								
-							//select email_id of reader
-							//$email_Que = "SELECT ";
+							
+							//getting book title and author; for mail purpose
+							$get_Que = "SELECT title, author FROM book WHERE book_ID=".$book_ID."";
+							$result = $conn->query($get_Que);
+
+							if ($result->num_rows > 0) {
+								// output data of each row
+								while($row = $result->fetch_assoc()) {
+									$book_title = $row["title"];
+									$book_author = $row["author"];
+								}
+
+								//query to get email_id of reader
+								$mail_Que = "SELECT email_ID from reader WHERE reader_ID=".$reader_ID.""; //working here
+							} else {
+								//echo "0 results";
+							}
 								
 							//execute queries
 							//inserting into BORROWED table
@@ -79,6 +94,26 @@ date_default_timezone_set("Asia/Calcutta");
 							} else {
 								echo "Error: " . $updateQue . "<br>" . $link->error;
 							}
+							//send mail to new user
+							$mail->setFrom('biblio.dsce@gmail.com');
+							$mail->addAddress($email);
+							$mail->isHTML(true);                                  //Set email format to HTML
+							$mail->Subject = 'Book Issue';
+
+							$mail->Body = '<p>Hello '.$fname.', here is your login credentials.</p>
+											<p>Login ID : <b>'.$reader_ID.'</b><br/>
+											Password : <b>'.$pwd.'</p>
+											<p>We welcome you to our large family of book-lovers!</p>';
+
+							$mail->AltBody = 'Here is your login credentials. Login ID : '.$reader_ID.'; Password : '.$pwd.'. Have a good day!';
+
+							if(!$mail->send()) {
+								// echo 'Message could not be sent.';
+								// echo 'Mailer Error: ' . $mail->ErrorInfo; No need to print any message
+							} else {
+								//echo 'Message has been sent'; 
+							}
+
 							echo "<script>alert('Book issued successfully');document.location='welcome_reader.php'</script>";
 							//javascript alert code here
 							//header("Location: welcome_reader.php");

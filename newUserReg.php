@@ -11,6 +11,8 @@ date_default_timezone_set("Asia/Calcutta");
 	
 	require 'connect_db.php';
 	
+	require 'mailDetails.php';
+	
 	//error variables
 	$fname_err = $lname_err = $email_err = $phone_err =  $address_err = "";
 	
@@ -79,7 +81,7 @@ date_default_timezone_set("Asia/Calcutta");
 			if($row_num == 1) {
 				while($data = $result->fetch_assoc()) {
 					$reader_ID = intval($data['last_ID']);
-					echo "Last reader_ID was ".$reader_ID."";
+					// echo "Last reader_ID was ".$reader_ID."";
 				}
 			} else {
 				echo "Some error occurred";
@@ -125,9 +127,27 @@ date_default_timezone_set("Asia/Calcutta");
 			} else {
 			echo "Error: " . $insert_reportQue . "<br>" . $link->error;
 			}
+
+			//send mail to new user
+			$mail->setFrom('biblio.dsce@gmail.com');
+    		$mail->addAddress($email);
+			$mail->isHTML(true);                                  //Set email format to HTML
+    		$mail->Subject = 'Welcome To Biblio@DSCE';
+
+			$mail->Body    = '<p>Hello '.$fname.', here is your login credentials.</p>
+							  <p>Login ID : <b>'.$reader_ID.'</b><br/>
+							  Password : <b>'.$pwd.'</p>
+							  <p>We welcome you to our large family of book-lovers!</p>';
+
+			$mail->AltBody = 'Here is your login credentials. Login ID : '.$reader_ID.'; Password : '.$pwd.'. Have a good day!';
+
+			if(!$mail->send()) {
+				// echo 'Message could not be sent.';
+				// echo 'Mailer Error: ' . $mail->ErrorInfo; No need to print any message
+			} else {
+				//echo 'Message has been sent'; 
+			}
 			
-			echo "<br/><br/>Randomly generated password is : ".$pwd;
-			//document.location='welcome_staff.php'
 			echo "<script>alert('Reader registered successfully. Password is ".$pwd."');document.location='welcome_staff.php';</script>";
 		} else {
 			//checking what error here. thats what we are getting. there's some error here boy
