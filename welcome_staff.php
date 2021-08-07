@@ -26,12 +26,6 @@ if(!isset($_SESSION["loggedin_staff"]) || $_SESSION["loggedin_staff"] !== true){
 		function returnClicked() {
 			window.location = "returnPage_staff.php";
 		}
-		function reserveClicked() {
-			window.location = "showReserve.php";
-		}
-		function viewClicked() {
-			window.location = "myBooks.php";
-		}
 		function searchEditClicked() {
 			window.location = "searchPage_editted_staff.php";
 		}
