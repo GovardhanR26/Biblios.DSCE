@@ -9,7 +9,7 @@ body{
 
 .loginbox{
 	width: 320px;
-	height: 420px;
+	//height: 420px;
 	background: #000;
 	color: #fff;
 	opacity: 0.8;
@@ -19,7 +19,17 @@ body{
 	position: absolute;
 	transform: translate(-50%,-50%);	
 	box-sizing: border-box;
-	padding: 60px 30px;
+	padding: 60px 35px;
+}
+
+.invalidmsg{
+	width: 320px;
+	height: 40px;
+	position: absolute;
+	top: 85%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	text-align: center;
 }
 
 .avatar{
@@ -34,9 +44,10 @@ body{
 
 .loginbox h1{
 	margin: 0;
-	//padding: 0 0 30px;
+	padding-bottom: 10px;
 	text-align: center;
 	font-family: lucida handwriting;
+	//font-family: 'Special Elite', cursive;
 	font-size: 25px;
 }
 
@@ -47,6 +58,9 @@ body{
 	font-weight: bold;
 	letter-spacing: 0.05em;
 	margin-top: 20px;
+	font-size: 18px;
+	//font-family: 'Cinzel', serif;
+	font-family: 'Alegreya Sans SC', sans-serif;
 }
 
 .loginbox input{
@@ -61,9 +75,12 @@ body{
 	border-bottom: 1px solid #fff;
 	background: transparent;
 	outline: none;
-	height: 40px;
+	height: 35px;
 	color: #fff;
+	letter-spacing: 0.05em;
 	font-size: 16px;
+	padding-left: 10px;
+	font-family: 'Baloo Chettan 2', cursive;
 }
 
 .loginbox input[type="text"],input[type="password"]:focus
@@ -81,6 +98,11 @@ body{
 	height: 40px;
 	color: #fff;
 	font-size: 16px;
+}
+
+.loginbox .form-group{
+	padding-top: 20px;
+	
 }
 
 .loginbox .form-control:focus{
@@ -102,6 +124,8 @@ body{
 	background: #fb2525;
 	color: #fff;
 	font-size: 18px;
+	font-family: 'Roboto Mono', monospace;
+	letter-spacing: 0.05em;
 	border-radius: 20px;
 }
 
@@ -138,10 +162,12 @@ body{
 	color: #fb2525;
 	border-radius: 10px;
 	font-weight: bold;
+	
 }
 
 .navbar-custom .container-fluid .collapse .navbar-nav .nav-item{
 	margin-left: 10px;
+	font-family: 'Roboto Mono', monospace;
 	
 }
 

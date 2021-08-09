@@ -97,45 +97,65 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Biblio@DSCE</title>
+	<script src="https://kit.fontawesome.com/5d3eee0a99.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-    </style>
+	<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@800&display=swap');
+</style>
+    <link rel="stylesheet" type="text/css" href="styletest.css">
 </head>
-<body style="background-color: pink">
-    <div class="wrapper">
-        <h2>Login</h2>
-        <p>Please fill in your credentials to login.</p>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-custom navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#" style="font-family: 'Segoe Script';">Biblio@DSCE</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="logintest.php">User</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Admin</a>
+        </li>
+		</ul>
+    </div>
+  </div>
+</nav>
 
-        <?php 
-        if(!empty($login_err)){
-            echo '<div class="alert alert-danger">' . $login_err . '</div>';
-        }        
-        ?>
+
+
+
+
+    <div class="loginbox">
+	
+	<h1>Login</h1>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            
+                <p><i class="far fa-user"></i>Username</p>
+				<input type="text" placeholder="Enter Username" name="username" autocomplete="off" class="<?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>">
+                <span class="invalid-feedback"><i class="fas fa-exclamation-circle"></i><?php echo $username_err; ?></span>
+             
+            
+                <p><i class="fas fa-unlock"></i>Password</p>
+				<input type="password" placeholder="Enter Password" name="password" class="<?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                <span class="invalid-feedback"><i class="fas fa-exclamation-circle"></i><?php echo $password_err; ?></span>
+           
             <div class="form-group">
-                <label>Login ID</label>
-                <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
-                <span class="invalid-feedback"><?php echo $username_err; ?></span>
-            </div>    
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $password_err; ?></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Login">
+                <input type="submit" value="Login"></br>
             </div>
             <!--Not currently using Sign Up option<p>Don't have an account? <a href="register.php">Sign up now</a>.</p>-->
         </form>
     </div>
-	<div>
-	<p>
-        If you are a reader, <a href="login_reader.php">login </a> here.
-    </p>
+	<div class="invalidmsg">
+		<?php 
+        if(!empty($login_err)){
+            echo '<div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i>' . $login_err . '</div>';
+        }        
+        ?>
 	</div>
 </body>
 </html>
