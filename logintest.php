@@ -4,7 +4,7 @@ session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: welcome.php");
+    header("location: homeuser.php");
     exit;
 }
  
@@ -20,14 +20,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
     if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
+        $username_err = "Please Enter Username.";
     } else{
         $username = trim($_POST["username"]);
     }
     
     // Check if password is empty
     if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
+        $password_err = "Please Enter Password.";
     } else{
         $password = trim($_POST["password"]);
     }
@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
         //$sql = "SELECT auth.loginID, auth.password, st.name FROM authentication auth, staff st WHERE auth.loginID = st.loginID and auth.loginID = ?";
-        $sql = "SELECT userID, password, fname FROM reader where userID = ?";
+        $sql = "SELECT a.login_ID userID, a.password password, r.fname FROM reader r, auth a WHERE r.login_ID = a.login_ID AND a.login_ID = ?";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
@@ -65,19 +65,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $sname;                            
                             
                             // Redirect user to welcome page
-                            header("location: welcome.php");
+                            header("location: homeuser.php");
                         } else{
                             // Password is not valid, display a generic error message
 							//I TYPED
 							//echo "<br/>Invalid username. password mismatch<br/>";
-                            $login_err = "Invalid username or password.";
+                            $login_err = "Invalid Username or Password";
                         }
                     }
                 } else{
                     // Username doesn't exist, display a generic error message
 					//I TYPED
 					//echo "<br/>Invalid username. Number of rows not one<br/>";
-                    $login_err = "Invalid username or password.";
+                    $login_err = "Invalid Username or Password";
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -99,22 +99,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Biblio@DSCE</title>
 	<script src="https://kit.fontawesome.com/5d3eee0a99.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@800&display=swap');
+</style>
     <link rel="stylesheet" type="text/css" href="styletest.css">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-custom navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Library Management System</a>
+    <a class="navbar-brand" href="#" style="font-family: 'Segoe Script';">Biblio@DSCE</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">User</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="adminlogin.html">Admin</a>
+          <a class="nav-link" href="login_staff.php">Admin</a>
         </li>
 		</ul>
     </div>
@@ -127,31 +133,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     <div class="loginbox">
 	
-	<h1>login</h1>
+	<h1>Login</h1>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             
                 <p><i class="far fa-user"></i>Username</p>
-				<input type="text" placeholder="Enter Username" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $username_err; ?></span>
+				<input type="text" placeholder="Enter Username" name="username" autocomplete="off" class="<?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>">
+                <span class="invalid-feedback"><i class="fas fa-exclamation-circle"></i><?php echo $username_err; ?></span>
              
             
                 <p><i class="fas fa-unlock"></i>Password</p>
-				<input type="password" placeholder="Enter Password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-                <span class="invalid-feedback"><?php echo $password_err; ?></span>
+				<input type="password" placeholder="Enter Password" name="password" class="<?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                <span class="invalid-feedback"><i class="fas fa-exclamation-circle"></i><?php echo $password_err; ?></span>
            
             <div class="form-group">
                 <input type="submit" value="Login"></br>
-				<a href="#">Forgot Password?</a>
             </div>
             <!--Not currently using Sign Up option<p>Don't have an account? <a href="register.php">Sign up now</a>.</p>-->
         </form>
+    </div>
+	<div class="invalidmsg">
 		<?php 
         if(!empty($login_err)){
-            echo '<div class="alert alert-danger">' . $login_err . '</div>';
+            echo '<div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i>' . $login_err . '</div>';
         }        
         ?>
-    </div>
+	</div>
 </body>
 </html>
 

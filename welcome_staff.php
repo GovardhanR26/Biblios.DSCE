@@ -13,68 +13,78 @@ if(!isset($_SESSION["loggedin_staff"]) || $_SESSION["loggedin_staff"] !== true){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Welcome</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body{ font: 14px sans-serif; text-align: center; }
-    </style>
-	<script>
-		//function searchClicked() {
-		//	window.location = "searchPage2.php";
-		//}
-		function issueClicked() {
-			window.location = "issuePage_staff.php";
-		}
-		function returnClicked() {
-			window.location = "returnPage_staff.php";
-		}
-		function reserveClicked() {
-			window.location = "showReserve.php";
-		}
-		function viewClicked() {
-			window.location = "myBooks.php";
-		}
-		function searchEditClicked() {
-			window.location = "searchPage_editted_staff.php";
-		}
-		function newUserClicked() {
-			window.location = "newUserReg.php";
-		}
-		function outstandingClicked() {
-			window.location = "outstandingPage.php";
-		}
-		function newbookClicked() {
-			window.location = "newBook.php";
-		}
-	</script>
+<title>Biblio@DSCE</title>
+	
+	<script src="https://kit.fontawesome.com/5d3eee0a99.js" crossorigin="anonymous"></script>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	
+	
+	<link rel="stylesheet" type="text/css" href="homeu.css">
 </head>
-<body style="background-color:green">
-    <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. You are a staff.</h1>
-	<center>
-	<input type="button" name="issue" onclick="issueClicked()" value="Issue"></input>
-	<br/><br/>
-	<!--seachPage2 is not working as expected.<input type="button" name="search" onclick="searchClicked()" value="Search"></input>
-	<br/><br/>-->
-	<input type="button" name="search" onclick="searchEditClicked()" value="Search Page Editted"></input>
-	<br/><br/>
-	<input type="button" name="return_book" onclick="returnClicked()" value="Return"></input>
-	<br/><br/>
-	<!--<input type="button" name="view_book" onclick="viewClicked()" value="My Books"></input>
-	<br/><br/>
-	<input type="button" name="reserve_show" onclick="reserveClicked()" value="My Reservations"></input>
-	<br/><br/>-->
-	<input type="button" name="outstanding_books" onclick="outstandingClicked()" value="Outstanding Books"></input>
-	<br/><br/>
-	<input type="button" name="new_book" onclick="newbookClicked()" value="New Book"></input>
-	<br/><br/>
-	<input type="button" onclick="newUserClicked()" value="New User"></input>
-	<center>
-	<br/>
-	<br/>
-    <p>
-        <!--We don't need this right now <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a><br/>-->
-        <a href="logout_staff.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
-    </p>
+<body>
+		<div class="vertical-nav bg-dark text-light" id="sidebar">
+			<div class="py-4 px-3 mb-4 bg-dark text-light">
+				<div class="media d-flex align-item-center">
+					<img src="avatar1.png" alt="user image" width="80" height="80" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+					<div class="media-body">
+					<h4 class="mt-3"> <?php echo htmlspecialchars($_SESSION["username"]); ?> </h4>
+					<p class="font-weight-normal text-muted mb-0">ADMIN</p>
+					</div>
+				</div>
+			</div>
+			
+			<p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
+			<ul class="nav flex-column bg-white mb-0">
+				<li class="nav-item">
+					<a href="#" class="nav-link active bg-dark text-dark" id="highlight"><i class="fa fa-th-large mr-3 text-primary fa-fw"></i>home</a>
+				</li>
+				<li class="nav-item">
+					<a href="staffsearch.php" class="nav-link bg-dark text-light"><i class="fas fa-search mr-3 text-primary fa-fw"></i>search book</a>
+				</li>
+				<li class="nav-item">
+					<a href="newbook.php" class="nav-link bg-dark text-light"><i class="fas fa-plus-square mr-3 text-primary fa-fw"></i>add book</a>
+				</li>
+				<li class="nav-item">
+					<a href="bookcatalogue.php" class="nav-link bg-dark text-light"><i class="fas fa-book-reader mr-3 text-primary fa-fw"></i>Book Catalogue</a>
+				</li>
+				<li class="nav-item">
+					<a href="staffborrow.php" class="nav-link bg-dark text-light"><i class="fas fa-book-open mr-3 text-primary fa-fw"></i>issue book</a>
+				</li>
+				<li class="nav-item">
+					<a href="outstandingpage.php" class="nav-link bg-dark text-light"><i class="fas fa-book mr-3 text-primary fa-fw"></i>outstanding books</a>
+				</li>
+				<li class="nav-item">
+					<a href="newUserReg.php" class="nav-link bg-dark text-light"><i class="fas fa-user-plus mr-3 text-primary fa-fw"></i>register new user</a>
+				</li>
+			</ul>
+			
+			<p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
+			<ul class="nav flex-column bg-white mb-0">
+				<li class="nav-item">
+					<a href="#" class="nav-link bg-dark text-light"><i class="fas fa-clipboard mr-3 text-primary fa-fw"></i>report</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link bg-dark text-light"><i class="fas fa-chart-bar mr-3 text-primary fa-fw"></i>statistics</a>
+				</li>
+			</ul>
+			
+			<p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0"></p>
+			<ul class="nav flex-column bg-white mb-0">
+				<li class="nav-item">
+					<a href="logout_staff.php" class="nav-link bg-dark text-light"><i class="fas fa-sign-out-alt mr-3 text-primary fa-fw"></i>logout</a>
+				</li>
+			</ul>
+		
+		</div>
+		
+		<div class="page-content p-5" id="content">
+			<h1>Welcome <?php echo htmlspecialchars($_SESSION["username"]); ?> !</h1>
+			<p style="text-align:center; margin-top: 200px; margin-left: 200px; width: 700px; font-size: 35px; font-style:italic;">
+			“Google can bring you back 100,000 answers, a librarian can bring you back the right one.”
+			</p>
+		</div>
 </body>
 </html>

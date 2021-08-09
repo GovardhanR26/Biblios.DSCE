@@ -1,0 +1,47 @@
+body {
+  background-image: url(lib3.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* font-family: sans-serif; */
+}
+
+.vertical-nav {
+  min-width: 17rem;
+  width: 17rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+  /* opacity: 0.9; */
+}
+
+.text-uppercase {
+  letter-spacing: 0.1em;
+}
+
+.nav-link {
+  text-transform: capitalize;
+}
+
+#highlight {
+  background: #fff !important;
+}
+
+.page-content {
+  width: calc(100% - 340px);
+  height: calc(100% - 30px);
+  padding: 60px 30px;
+  background: #fff;
+  color: #000;
+  opacity: 0.9;
+  border-radius: 5px;
+  top: 15px;
+  left: 305px;
+  position: absolute;
+  /* transform: translate(-50%,-50%);	 */
+  box-sizing: border-box;
+}
