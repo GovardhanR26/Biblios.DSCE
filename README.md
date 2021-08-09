@@ -1,4 +1,4 @@
-# Biblios.DSCE
+# Biblios@DSCE
 “To ask why we need libraries at all, when there is so much information available elsewhere, is about as sensible as asking if roadmaps are necessary now that there are so very many roads.”
 The main purpose of our project is to automate the day-to-day working of a library. It is used to make the efficient use of the human resources in addition to the computing power.
 
