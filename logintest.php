@@ -33,11 +33,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     //echo "You entered : ".$username." : ".$password."";
     // Validate credentials
-    if(empty($username_err) && empty($password_err)){
+    if(empty($username_err) && empty($password_err)) {
         // Prepare a select statement
         //$sql = "SELECT auth.loginID, auth.password, st.name FROM authentication auth, staff st WHERE auth.loginID = st.loginID and auth.loginID = ?";
         $sql = "SELECT a.login_ID userID, a.password password, r.fname FROM reader r, auth a WHERE r.login_ID = a.login_ID AND a.login_ID = ?";
-        if($stmt = mysqli_prepare($link, $sql)){
+	    
+        if($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
             
@@ -53,9 +54,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if(mysqli_stmt_num_rows($stmt) == 1){                    
                     // Bind result variables
                     mysqli_stmt_bind_result($stmt, $id, $hashed_password, $sname);
+			
                     if(mysqli_stmt_fetch($stmt)){
                         //if(password_verify($password, $hashed_password)){
-						if($password==$hashed_password) {
+			if($password==$hashed_password) {
                             // Password is correct, so start a new session
                             session_start();
                             
@@ -66,17 +68,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             
                             // Redirect user to welcome page
                             header("location: homeuser.php");
-                        } else{
-                            // Password is not valid, display a generic error message
-							//I TYPED
-							//echo "<br/>Invalid username. password mismatch<br/>";
+                        } else {
                             $login_err = "Invalid Username or Password";
                         }
                     }
-                } else{
-                    // Username doesn't exist, display a generic error message
-					//I TYPED
-					//echo "<br/>Invalid username. Number of rows not one<br/>";
+                } else {
                     $login_err = "Invalid Username or Password";
                 }
             } else{
